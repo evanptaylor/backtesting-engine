@@ -9,7 +9,7 @@ class BuyHold(bt.Strategy):
 
     def log(self, txt, dt=None):
         dt = dt or self.datas[0].datetime.date(0)
-        print('%s, %s' % (dt.isoformat(), txt))
+        print(f"{dt.isoformat()} => {txt}")
 
     def __init__(self):
         self.order = None
@@ -19,6 +19,6 @@ class BuyHold(bt.Strategy):
             pos_size = (self.params.order_percentage * self.broker.cash)
             size = math.floor(pos_size/self.data.close)
             self.order = self.buy(size=size)
-            self.log(f"BUY: {size} shares of SPY @ {self.data.close[0]}")
+            self.log(f"BUY: {size} shares of {self.params.ticker} @ {self.data.close[0]}")
 
 
