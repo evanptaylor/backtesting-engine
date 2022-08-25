@@ -14,7 +14,7 @@ class MA_Crossover(bt.Strategy):
     )
     def log(self, txt, dt=None):
         dt = dt or self.datas[0].datetime.date(0)
-        print('%s, %s' % (dt.isoformat(), txt))
+        print(f"{dt.isoformat()} => {txt}")
 
     def __init__(self):
         self.fast_MA = bt.indicators.SMA(
@@ -34,10 +34,10 @@ class MA_Crossover(bt.Strategy):
             if self.crossover > 0:
                 pos_size = (self.params.order_percentage*self.broker.cash)
                 self.size = math.floor(pos_size/self.data.close)
-                self.log(f"BUY: {self.size} shares of SPY @ {self.data.close[0]}")
+                self.log(f"BUY: {self.size} shares of {self.params.ticker} @ {self.data.close[0]}")
                 self.buy(size=self.size)
         
         if self.position.size>0:
             if self.crossover<0:
-                self.log(f"SELL: {self.size} shares of SPY @ {self.data.close[0]}")
+                self.log(f"SELL: {self.size} shares of {self.params.ticker} @ {self.data.close[0]}")
                 self.close()
