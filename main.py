@@ -1,6 +1,7 @@
 import backtrader as bt
 import datetime
 from strategy_buyhold import BuyHold
+from strategy_moving_avg_cross import MA_Crossover
 
 #instatiate cerebro engine
 engine = bt.Cerebro()
@@ -15,7 +16,8 @@ data = bt.feeds.YahooFinanceCSVData(
 #add data to engine
 engine.adddata(data)
 #add a strategy
-engine.addstrategy(BuyHold)
+#engine.addstrategy(BuyHold)
+engine.addstrategy(MA_Crossover)
 
 #portfolio start value (before strategy is run) 
 print(f'Portfolio value (start): {engine.broker.getvalue()}')
