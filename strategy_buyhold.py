@@ -2,7 +2,10 @@ import backtrader as bt
 import math
 
 class BuyHold(bt.Strategy):
-    params = (('ticker', 'SPY'), ('order_percentage', 1))
+    params = (
+        ('ticker', 'SPY'),
+        ('order_percentage', 1)
+    )
 
     def log(self, txt, dt=None):
         dt = dt or self.datas[0].datetime.date(0)
